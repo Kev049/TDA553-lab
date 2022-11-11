@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.text.DecimalFormat;
 
 public abstract class Car implements Movable {
 
@@ -8,17 +9,18 @@ public abstract class Car implements Movable {
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    private double directionY;
-    private double directionX;
+    private int directionY;
+    private int directionX;
     // private Point position;
     private Point2D.Double position;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     
     public Car(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
         this.color = color;        
+        this.directionY = 1;
         this.modelName = modelName;
         this.directionX = 0;
-        this.directionY = 0;
         this.position = new Point2D.Double(0.0, 0.0);
         if (enginePower >= 0) {
             this.enginePower = enginePower;
@@ -29,8 +31,20 @@ public abstract class Car implements Movable {
     }
 
     public void move(){
-        this.position.x += this.getCurrentSpeed() * this.directionX;
-        this.position.y += this.getCurrentSpeed() * this.directionY;
+        if (this.directionX % 2 != 0){
+            System.out.println("X");
+            this.position.x = roundPosition(this.position.x, this.directionX);
+        } else {
+            System.out.println("Y");
+            this.position.y = roundPosition(this.position.y, this.directionY);
+        }
+    }
+    
+    //default rounding mode is HALF_EVEN
+    public double roundPosition(double position, int direction) { 
+        double temp = position + this.getCurrentSpeed() * direction;
+        String s = df.format(temp);
+        return Double.parseDouble(s);
     }
 
     public void turnLeft(){
@@ -58,7 +72,7 @@ public abstract class Car implements Movable {
             this.directionY = -1;
         } else if (this.directionX == 0 && this.directionY == -1) {
             this.directionX = -1;
-            this.directionX = 0;
+            this.directionY = 0;
         } else if (this.directionX == -1 && this.directionY == 0) {
             this.directionX = 0;
             this.directionY = 1;
