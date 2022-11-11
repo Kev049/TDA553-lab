@@ -15,12 +15,16 @@ public abstract class Car implements Movable {
     
     public Car(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
-        this.color = color;
-        this.enginePower = enginePower;
+        this.color = color;        
         this.modelName = modelName;
         this.directionX = 0;
         this.directionY = 0;
         this.position = new Point2D.Double(0.0, 0.0);
+        if (enginePower >= 0) {
+            this.enginePower = enginePower;
+        } else {
+            enginePower = 0;
+        }
         stopEngine();
     }
 
@@ -65,31 +69,46 @@ public abstract class Car implements Movable {
     }
 
     public void startEngine(){
-	    this.currentSpeed = 0.1;
+        double initalSpeed = 0.1;
+        if (this.enginePower >= initalSpeed) {
+            this.currentSpeed = initalSpeed;
+        } else {
+            this.currentSpeed = this.enginePower;
+        }
     }
 
-    public void stopEngine(){
-	    this.currentSpeed = 0;
+    public void stopEngine(){ 
+        this.currentSpeed = 0;
     }
 
     public abstract double speedFactor(); 
 
     // TODO fix this method according to lab pm
     public void gas(double amount){
-        incrementSpeed(amount);
+        if (amount >= 0 && amount <= 1) {
+            incrementSpeed(amount);
+        }
     }
 
     // TODO fix this method according to lab pm
     public void brake(double amount){
-        decrementSpeed(amount);
+        if (amount >= 0 && amount <= 1) {
+            decrementSpeed(amount);
+        }
     }
 
     public void incrementSpeed(double amount){
-	    currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+        double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        if (currentSpeed < newSpeed){
+	        currentSpeed = newSpeed;
+        }
     }
 
     public void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+        double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+        if (currentSpeed > newSpeed) {
+            currentSpeed = newSpeed;
+        }
     }
 
     //getters
@@ -107,6 +126,18 @@ public abstract class Car implements Movable {
 
     public Color getColor(){
         return this.color;
+    }
+
+    public Point2D getPosition(){
+        return this.position;
+    }
+
+    public double getDirectionX(){
+        return this.directionX;
+    }
+
+    public double getDirectionY(){
+        return this.directionY;
     }
 
     //setters
