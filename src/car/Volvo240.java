@@ -4,14 +4,16 @@ import java.awt.*;
 public class Volvo240 extends Car{
 
     private final static double trimFactor = 1.25;
+    private final static int numberOfDoors = 4;
+    private final static double enginePower = 100.0;
     
     public Volvo240(){
-        super(4, Color.black, 100, "Volvo240");
+        super(numberOfDoors, Color.black, enginePower, "Volvo240");
     }
 
     @Override
     public double speedFactor(){
-        return this.getEnginePower() * 0.01 * trimFactor;
+        return this.getEnginePower() * this.getSpeedFactorVar() * trimFactor;
     }
     
 }

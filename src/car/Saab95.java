@@ -3,10 +3,14 @@ import java.awt.*;
 
 public class Saab95 extends Car{
 
+    private final static int factorwhenTurboOff = 1;
+    private final static double turboFactor = 1.3;
+    private final static int numberOfDoors = 2;
+    private final static double enginePower = 125.0;
     private boolean turboOn;
     
     public Saab95(){
-        super(2, Color.red, 125, "Saab95");
+        super(numberOfDoors, Color.red, enginePower, "Saab95");
         turboOn = false;
     }
 
@@ -20,10 +24,10 @@ public class Saab95 extends Car{
     
     @Override
     public double speedFactor(){
-        double turbo = 1;
+        double turbo = factorwhenTurboOff;
         if(turboOn) 
-            turbo = 1.3;
-        return this.getEnginePower() * 0.01 * turbo;
+            turbo = turboFactor;
+        return this.getEnginePower() * this.getSpeedFactorVar() * turbo;
     }
 
 }
