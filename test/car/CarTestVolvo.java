@@ -9,19 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.After;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-
-import java.util.Locale;
 
 public class CarTestVolvo {
-  
+
   Volvo240 vCar = new Volvo240();
-  
-  @BeforeEach
-  public void init() {
-    Locale.setDefault(Locale.US);
-  }
 
   @After
   public void tearDown() {
@@ -41,21 +32,21 @@ public class CarTestVolvo {
   }
 
   @Test
-  public void moveShouldDoNothingIfEngineOFF(){
+  public void moveShouldDoNothingIfEngineOFF() {
     Volvo240 unmovedCar = new Volvo240();
     vCar.move();
     assertEquals(unmovedCar.getPosition(), vCar.getPosition());
   }
 
   @Test
-  public void startEngineShouldChangeCurrentSpeed(){
+  public void startEngineShouldChangeCurrentSpeed() {
     Volvo240 unmovedCar = new Volvo240();
     vCar.startEngine();
     assertNotEquals(unmovedCar.getCurrentSpeed(), vCar.getCurrentSpeed());
   }
 
   @Test
-  public void turningOffEngineShouldChangeCurrentSpeedToStationary(){
+  public void turningOffEngineShouldChangeCurrentSpeedToStationary() {
     Volvo240 unmovedCar = new Volvo240();
     vCar.startEngine();
     vCar.stopEngine();
@@ -63,14 +54,14 @@ public class CarTestVolvo {
   }
 
   @Test
-  public void turningShouldChangeDirection(){
+  public void turningShouldChangeDirection() {
     Volvo240 unturnedCar = new Volvo240();
     vCar.turnLeft();
     assertNotEquals(unturnedCar.getDirection(), vCar.getDirection());
   }
 
   @Test
-  public void carTurningRightTwiceWillHaveTheSameDirectionAsIfItTurnedLeftTwice(){
+  public void carTurningRightTwiceWillHaveTheSameDirectionAsIfItTurnedLeftTwice() {
     Volvo240 leftTurningCar = new Volvo240();
     vCar.turnRight();
     vCar.turnRight();
@@ -91,7 +82,7 @@ public class CarTestVolvo {
   }
 
   @Test
-  public void doesTurnRightChangeDirectionBy90Degrees(){
+  public void doesTurnRightChangeDirectionBy90Degrees() {
     assertEquals(Car.NORTH, vCar.getDirection());
     vCar.turnRight();
     assertEquals(Car.EAST, vCar.getDirection());
@@ -155,14 +146,14 @@ public class CarTestVolvo {
   }
 
   @Test
-  public void halfGasShouldIncreaseSpeed(){
+  public void halfGasShouldIncreaseSpeed() {
     vCar.startEngine();
     vCar.gas(0.5);
     assertEquals(0.725, vCar.getCurrentSpeed(), 0.0001);
   }
 
   @Test
-  public void fullGasShouldUtiliseMaxEnginePower(){
+  public void fullGasShouldUtiliseMaxEnginePower() {
     vCar.startEngine();
     vCar.gas(1);
     assertEquals(1.35, vCar.getCurrentSpeed(), 0.0001);
@@ -180,6 +171,21 @@ public class CarTestVolvo {
     vCar.gas(1);
     vCar.move();
     assertEquals(new Point2D.Double(0.0, 7.8), vCar.getPosition());
+  }
+
+  @Test
+  public void maxSpeedShouldNotBeMoreThanEnginePower() {
+    double enginePower = vCar.getEnginePower();
+    vCar.startEngine();
+    while (true) {
+      double currentSpeed = vCar.getCurrentSpeed();
+      vCar.gas(1);
+      double newSpeed = vCar.getCurrentSpeed();
+      if (currentSpeed == newSpeed) {
+        assertEquals(vCar.getCurrentSpeed(), enginePower, 0.0001);
+        break;
+      }
+    }
   }
 
 }

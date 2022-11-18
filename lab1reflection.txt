@@ -1,11 +1,35 @@
-1. We decided to use an abstract class named "Car" instead of an interface class. Abstract classes represent a generlisation of several different subclasses.
-Volvo240 and Saab95 are both cars and they have many common methods and variables. Declaring those methods and variables allowed in our abstract class "Car" allowed
-us to reduce redundancy. 
+Explain how you chose the inheritance hierarchy in Task 1, making reference to the Open-Closed Principle. 
 
-Our code and our JUnit tests are written to be in accordance with OCP. If our code were to be modified in some way the JUnit tests should not fail. 
-Ideally, they should only fail if the modifications removed or changed something which we deem is a paramount, inherent part of the code and intended functionality.
-In accordance, our JUnit tests verify that our subclasses Saab95 and Volvo240 have doors, a model name and a color. The methods are tested and named in such a way that
-future developers should easily grasp how they are meant to work. 
+We discovered early into the project that the Volvo240 class and the Saab95 class had almost the same variables and methods.
+Therefore, we decided to make Car an abstract class instead of an interface since we wanted to extract the common functionality
+and increase reusability. We thought that Car should be an abstract class (rather than a normal class) since every car has
+a brand and a model so you shouldn’t be able to make instances without specifying those attributes. Both Volvo240 and Saab95
+could then become subclasses of Car and a lot of repeating code could be removed.  
+
+We chose to also include an interface called Movable with a few method declarations (which are implemented by Car) to show that
+all types of cars must implement the rudimentary methods specified in Movable. This forms a contract that either the Car class
+or its subclasses must fulfil for the program to compile. Following the Open-Closed Principle, if we were to add other types
+of vehicles that aren’t cars, they could also implement the “Movable” interface (without having to inherit from Car) and take
+advantage of subtype polymorphism. 
 
 
-We made a concerted effort to "develop for change". A great deal of refactoring has been 
+Explain how you implemented each of the sanity checks in Task 4. 
+
+To avoid values other than those in range [0, 1], we implemented an if statement that verified that the “amount” value was
+in said range. The aforementioned if statement is used in both the “gas” function and the “brake” function. If the value is
+not in the interval, we simply ignore it. Otherwise, the “incrementSpeed” function is called.  
+ 
+With regards to the second sanity check, we make sure that currentSpeed is always greater or equal to 0 and lesser than or
+equal to enginePower in the decrementSpeed and incrementSpeed methods respectively. We do this by using the Math.min function
+when decreasing speed (with our 2 parameters being an expression for new speed as well as a constant whose value is the
+literal 0) and when increasing speed, we use Math.max in the same way but using enginePower as an argument rather than 0.
+
+Finally, to fulfil the 3rd and 4th sanity checks, we have an if statement that compares the current speed of the car as
+well as the potential new speed in both the gas and brake methods. If the gas method is called and the potential new speed
+is higher than the current speed, the current speed is set to this new speed; otherwise, nothing is done. On the other
+hand, if the brake method is called and the new potential speed is lower than the initial speed, the current speed is set
+to the new, lower speed; otherwise, nothing is done. 
+
+ 
+
+ 

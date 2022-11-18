@@ -8,19 +8,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-
-import java.util.Locale;
 
 public class CarTestSaab {
-  
+
   Saab95 sCar = new Saab95();
-  
-  @BeforeEach
-  public void init() {
-    Locale.setDefault(Locale.US);
-  }
 
   @Test
   public void propertiesOfCarInitialised() {
@@ -35,21 +26,21 @@ public class CarTestSaab {
   }
 
   @Test
-  public void moveShouldDoNothingIfEngineOFF(){
+  public void moveShouldDoNothingIfEngineOFF() {
     Saab95 unmovedCar = new Saab95();
     sCar.move();
     assertEquals(unmovedCar.getPosition(), sCar.getPosition());
   }
 
   @Test
-  public void startEngineShouldChangeCurrentSpeed(){
+  public void startEngineShouldChangeCurrentSpeed() {
     Saab95 unmovedCar = new Saab95();
     sCar.startEngine();
     assertNotEquals(unmovedCar.getCurrentSpeed(), sCar.getCurrentSpeed());
   }
 
   @Test
-  public void turningOffEngineShouldChangeCurrentSpeedToStationary(){
+  public void turningOffEngineShouldChangeCurrentSpeedToStationary() {
     Saab95 unmovedCar = new Saab95();
     sCar.startEngine();
     sCar.stopEngine();
@@ -57,14 +48,14 @@ public class CarTestSaab {
   }
 
   @Test
-  public void turningShouldChangeDirection(){
+  public void turningShouldChangeDirection() {
     Saab95 unturnedCar = new Saab95();
     sCar.turnLeft();
     assertNotEquals(unturnedCar.getDirection(), sCar.getDirection());
   }
 
   @Test
-  public void carTurningRightTwiceWillHaveTheSameDirectionAsIfItTurnedLeftTwice(){
+  public void carTurningRightTwiceWillHaveTheSameDirectionAsIfItTurnedLeftTwice() {
     Saab95 leftTurningCar = new Saab95();
     sCar.turnRight();
     sCar.turnRight();
@@ -85,7 +76,7 @@ public class CarTestSaab {
   }
 
   @Test
-  public void doesTurnRightChangeDirectionBy90Degrees(){
+  public void doesTurnRightChangeDirectionBy90Degrees() {
     assertEquals(Car.NORTH, sCar.getDirection());
     sCar.turnRight();
     assertEquals(Car.EAST, sCar.getDirection());
@@ -149,14 +140,14 @@ public class CarTestSaab {
   }
 
   @Test
-  public void halfGasShouldIncreaseSpeed(){
+  public void halfGasShouldIncreaseSpeed() {
     sCar.startEngine();
     sCar.gas(0.5);
     assertEquals(0.725, sCar.getCurrentSpeed(), 0.0001);
   }
 
   @Test
-  public void fullGasShouldUtiliseMaxEnginePower(){
+  public void fullGasShouldUtiliseMaxEnginePower() {
     sCar.startEngine();
     sCar.gas(1);
     assertEquals(1.35, sCar.getCurrentSpeed(), 0.0001);
@@ -174,6 +165,45 @@ public class CarTestSaab {
     sCar.gas(1);
     sCar.move();
     assertEquals(new Point2D.Double(0.0, 7.8), sCar.getPosition());
+  }
+
+  @Test
+  public void maxSpeedShouldNotBeMoreThanEnginePower() {
+    double enginePower = sCar.getEnginePower();
+    sCar.startEngine();
+    while (true) {
+      double currentSpeed = sCar.getCurrentSpeed();
+      sCar.gas(1);
+      double newSpeed = sCar.getCurrentSpeed();
+      if (currentSpeed == newSpeed) {
+        assertEquals(sCar.getCurrentSpeed(), enginePower, 0.0001);
+        break;
+      }
+    }
+  }
+
+  @Test
+  public void turboIncreasesMaximumOneThatTheCarCanAccelerate() {
+    Saab95 carWithTurbo = new Saab95();
+    carWithTurbo.setTurboOn();
+    sCar.gas(1);
+    carWithTurbo.gas(1);
+    assertTrue(carWithTurbo.getCurrentSpeed() > sCar.getCurrentSpeed());
+  }
+
+  @Test
+  public void canTurboBeTurnedOffAfterTurboAcceleration() {
+    Saab95 anotherCar = new Saab95();
+    anotherCar.setTurboOn();
+    sCar.gas(1);
+    anotherCar.gas(1);
+    double speedWithTurbo = anotherCar.getCurrentSpeed();
+    double speedWithoutTurbo = sCar.getCurrentSpeed();
+
+    anotherCar.setTurboOff();
+    sCar.gas(1);
+    anotherCar.gas(1);
+    assertEquals(anotherCar.getCurrentSpeed() - speedWithTurbo, sCar.getCurrentSpeed() - speedWithoutTurbo, 0.0001);
   }
 
 }
