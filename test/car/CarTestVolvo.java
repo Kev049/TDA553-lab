@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +21,11 @@ public class CarTestVolvo {
   @BeforeEach
   public void init() {
     Locale.setDefault(Locale.US);
+  }
+
+  @After
+  public void tearDown() {
+    vCar = null;
   }
 
   @Test

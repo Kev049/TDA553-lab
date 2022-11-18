@@ -1,6 +1,7 @@
 ## Group Members
 
-Frida Sundelin
-Kevin Collins
-Simon Hammerlid
+* Frida Sundelin
+* Kevin Collins
+* Simon Hammerlid
+
 ⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆
