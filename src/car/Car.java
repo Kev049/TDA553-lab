@@ -45,18 +45,18 @@ public abstract class Car implements Movable {
     public void move(){
         if (this.direction == WEST || this.direction == EAST){
             System.out.println("X");
-            this.position.x = roundPosition(this.position.x, this.direction.x);
+            this.position.x = calculatePosition(this.position.x, this.direction.x);
         } else {
             System.out.println("Y");
-            this.position.y = roundPosition(this.position.y, this.direction.y);
+            this.position.y = calculatePosition(this.position.y, this.direction.y);
         }
     }
     
     //default rounding mode is HALF_EVEN
-    public double roundPosition(double position, int direction) { 
-        double temp = position + this.getCurrentSpeed() * direction;
-        String s = df.format(temp);
-        return Double.parseDouble(s);
+    private double calculatePosition(double position, int direction) { 
+        double newPosition = position + this.getCurrentSpeed() * direction;
+        String newPositionString = df.format(newPosition);
+        return Double.parseDouble(newPositionString);
     }
 
     public void turnLeft(){
@@ -115,15 +115,15 @@ public abstract class Car implements Movable {
         }
     }
 
-    public void incrementSpeed(double amount){
+    private void incrementSpeed(double amount){
         double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
         if (currentSpeed < newSpeed){
 	        currentSpeed = newSpeed;
         }
     }
 
-    public void decrementSpeed(double amount){
-        double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, minSpeed);
+    private void decrementSpeed(double amount){
+        double newSpeed = Math.max(getCurrentSpeed() - (speedFactor() * amount), minSpeed);
         if (currentSpeed > newSpeed) {
             currentSpeed = newSpeed;
         }

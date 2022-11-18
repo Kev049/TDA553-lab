@@ -1,6 +1,7 @@
 package car;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -92,6 +93,87 @@ public class CarTestVolvo {
     assertEquals(Car.SOUTH, vCar.getDirection());
     vCar.turnRight();
     assertEquals(Car.WEST, vCar.getDirection());
+  }
+
+  @Test
+  public void moveAfterTurningOnTheEngineDrivesNorth() {
+    vCar.startEngine();
+    assertEquals(new Point2D.Double(0.0, 0.0), vCar.getPosition());
+    vCar.move();
+    assertEquals(new Point2D.Double(0.0, 0.1), vCar.getPosition());
+    vCar.move();
+    assertEquals(new Point2D.Double(0.0, 0.2), vCar.getPosition());
+  }
+
+  @Test
+  public void moveAfterTurningLeftDrivesWest() {
+    vCar.startEngine();
+    vCar.turnLeft();
+    vCar.move();
+    assertEquals(new Point2D.Double(-0.1, 0.0), vCar.getPosition());
+  }
+
+  @Test
+  public void moveAfterTurningLeftDrivesEast() {
+    vCar.startEngine();
+    vCar.turnRight();
+    vCar.move();
+    assertEquals(new Point2D.Double(0.1, 0.0), vCar.getPosition());
+  }
+
+  @Test
+  public void moveAfterMakingAUturnDrivesInOppositeDirection() {
+    vCar.startEngine();
+    assertEquals(Car.NORTH, vCar.getDirection());
+    vCar.turnLeft();
+    vCar.turnLeft();
+    vCar.move();
+    assertEquals(new Point2D.Double(0.0, -0.1), vCar.getPosition());
+  }
+
+  @Test
+  public void maximumBrakeReducesSpeedToZero() {
+    vCar.startEngine();
+    vCar.move();
+    assertEquals(0.1, vCar.getCurrentSpeed(), 0.0001);
+    vCar.brake(1);
+    assertEquals(0.0, vCar.getCurrentSpeed(), 0.0001);
+  }
+
+  @Test
+  public void OnePercentBrakeReducesSpeedButCarShouldStillBeMoving() {
+    vCar.startEngine();
+    assertEquals(0.1, vCar.getCurrentSpeed(), 0.000001);
+    vCar.brake(0.01);
+    assertEquals(0.0875, vCar.getCurrentSpeed(), 0.000001);
+  }
+
+  @Test
+  public void halfGasShouldIncreaseSpeed(){
+    vCar.startEngine();
+    vCar.gas(0.5);
+    assertEquals(0.725, vCar.getCurrentSpeed(), 0.0001);
+  }
+
+  @Test
+  public void fullGasShouldUtiliseMaxEnginePower(){
+    vCar.startEngine();
+    vCar.gas(1);
+    assertEquals(1.35, vCar.getCurrentSpeed(), 0.0001);
+  }
+
+  @Test
+  public void fullGasWithMoveShouldRepetitvelyIncreasePositionQuickerInSameDirection() {
+    vCar.startEngine();
+    vCar.gas(1);
+    vCar.move();
+    assertEquals(new Point2D.Double(0.0, 1.35), vCar.getPosition());
+    vCar.gas(1);
+    vCar.move();
+    assertEquals(new Point2D.Double(0.0, 3.95), vCar.getPosition());
+    vCar.gas(1);
+    vCar.move();
+    assertEquals(new Point2D.Double(0.0, 7.8), vCar.getPosition());
   }
 
 }

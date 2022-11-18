@@ -1,3 +1,11 @@
 1. We decided to use an abstract class named "Car" instead of an interface class. Abstract classes represent a generlisation of several different subclasses.
 Volvo240 and Saab95 are both cars and they have many common methods and variables. Declaring those methods and variables allowed in our abstract class "Car" allowed
-us to reduce redundancy.
+us to reduce redundancy. 
+
+Our code and our JUnit tests are written to be in accordance with OCP. If our code were to be modified in some way the JUnit tests should not fail. 
+Ideally, they should only fail if the modifications removed or changed something which we deem is a paramount, inherent part of the code and intended functionality.
+In accordance, our JUnit tests verify that our subclasses Saab95 and Volvo240 have doors, a model name and a color. The methods are tested and named in such a way that
+future developers should easily grasp how they are meant to work. 
+
+
+We made a concerted effort to "develop for change". A great deal of refactoring has been 
