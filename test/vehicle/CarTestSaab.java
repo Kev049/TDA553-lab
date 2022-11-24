@@ -69,24 +69,24 @@ public class CarTestSaab {
 
   @Test
   public void doesTurnLeftChangeDirectionBy90Degrees() {
-    assertEquals(Car.NORTH, sCar.getDirection());
+    assertEquals(Vehicle.NORTH, sCar.getDirection());
     sCar.turnLeft();
-    assertEquals(Car.WEST, sCar.getDirection());
+    assertEquals(Vehicle.WEST, sCar.getDirection());
     sCar.turnLeft();
-    assertEquals(Car.SOUTH, sCar.getDirection());
+    assertEquals(Vehicle.SOUTH, sCar.getDirection());
     sCar.turnLeft();
-    assertEquals(Car.EAST, sCar.getDirection());
+    assertEquals(Vehicle.EAST, sCar.getDirection());
   }
 
   @Test
   public void doesTurnRightChangeDirectionBy90Degrees() {
-    assertEquals(Car.NORTH, sCar.getDirection());
+    assertEquals(Vehicle.NORTH, sCar.getDirection());
     sCar.turnRight();
-    assertEquals(Car.EAST, sCar.getDirection());
+    assertEquals(Vehicle.EAST, sCar.getDirection());
     sCar.turnRight();
-    assertEquals(Car.SOUTH, sCar.getDirection());
+    assertEquals(Vehicle.SOUTH, sCar.getDirection());
     sCar.turnRight();
-    assertEquals(Car.WEST, sCar.getDirection());
+    assertEquals(Vehicle.WEST, sCar.getDirection());
   }
 
   @Test
@@ -118,7 +118,7 @@ public class CarTestSaab {
   @Test
   public void moveAfterMakingAUturnDrivesInOppositeDirection() {
     sCar.startEngine();
-    assertEquals(Car.NORTH, sCar.getDirection());
+    assertEquals(Vehicle.NORTH, sCar.getDirection());
     sCar.turnLeft();
     sCar.turnLeft();
     sCar.move();

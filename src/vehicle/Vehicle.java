@@ -3,7 +3,7 @@ package vehicle;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public abstract class Car implements Movable {
+public abstract class Vehicle implements Movable {
 
     public static final Point NORTH = new Point(0, 1);
     public static final Point SOUTH = new Point(0, -1);
@@ -25,7 +25,7 @@ public abstract class Car implements Movable {
     private Point direction;
     private Point2D.Double position;
 
-    public Car(int nrDoors, Color color, double enginePower, String modelName) {
+    public Vehicle(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.modelName = modelName;

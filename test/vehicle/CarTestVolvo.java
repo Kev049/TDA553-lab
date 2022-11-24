@@ -75,24 +75,24 @@ public class CarTestVolvo {
 
   @Test
   public void doesTurnLeftChangeDirectionBy90Degrees() {
-    assertEquals(Car.NORTH, vCar.getDirection());
+    assertEquals(Vehicle.NORTH, vCar.getDirection());
     vCar.turnLeft();
-    assertEquals(Car.WEST, vCar.getDirection());
+    assertEquals(Vehicle.WEST, vCar.getDirection());
     vCar.turnLeft();
-    assertEquals(Car.SOUTH, vCar.getDirection());
+    assertEquals(Vehicle.SOUTH, vCar.getDirection());
     vCar.turnLeft();
-    assertEquals(Car.EAST, vCar.getDirection());
+    assertEquals(Vehicle.EAST, vCar.getDirection());
   }
 
   @Test
   public void doesTurnRightChangeDirectionBy90Degrees() {
-    assertEquals(Car.NORTH, vCar.getDirection());
+    assertEquals(Vehicle.NORTH, vCar.getDirection());
     vCar.turnRight();
-    assertEquals(Car.EAST, vCar.getDirection());
+    assertEquals(Vehicle.EAST, vCar.getDirection());
     vCar.turnRight();
-    assertEquals(Car.SOUTH, vCar.getDirection());
+    assertEquals(Vehicle.SOUTH, vCar.getDirection());
     vCar.turnRight();
-    assertEquals(Car.WEST, vCar.getDirection());
+    assertEquals(Vehicle.WEST, vCar.getDirection());
   }
 
   @Test
@@ -124,7 +124,7 @@ public class CarTestVolvo {
   @Test
   public void moveAfterMakingAUturnDrivesInOppositeDirection() {
     vCar.startEngine();
-    assertEquals(Car.NORTH, vCar.getDirection());
+    assertEquals(Vehicle.NORTH, vCar.getDirection());
     vCar.turnLeft();
     vCar.turnLeft();
     vCar.move();
