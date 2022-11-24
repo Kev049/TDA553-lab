@@ -1,4 +1,4 @@
-package car;
+package vehicle;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -8,6 +8,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.Test;
+
+// import vehicle.Car;
+// import vehicle.Saab95;
 
 public class CarTestSaab {
 

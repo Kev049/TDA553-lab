@@ -1,4 +1,4 @@
-package car;
+package vehicle;
 
 import java.awt.*;
 
