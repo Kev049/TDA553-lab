@@ -66,8 +66,8 @@ public abstract class Car implements Movable {
 
     public void turnRight() {
         if (this.direction == EAST) {
-        } else if (this.direction == SOUTH) {
             this.direction = SOUTH;
+        } else if (this.direction == SOUTH) {
             this.direction = WEST;
         } else if (this.direction == WEST) {
             this.direction = NORTH;
