@@ -103,8 +103,11 @@ public abstract class Vehicle implements Movable {
         }
     }
 
+    //TODO Refactor increment and decrementSpeed to extract out rounding calculation
+
     private void incrementSpeed(double amount) {
         double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        newSpeed = Math.round(newSpeed * 10000.0) / 10000.0;
         if (currentSpeed < newSpeed) {
             currentSpeed = newSpeed;
         }
@@ -112,6 +115,7 @@ public abstract class Vehicle implements Movable {
 
     private void decrementSpeed(double amount) {
         double newSpeed = Math.max(getCurrentSpeed() - (speedFactor() * amount), minSpeed);
+        newSpeed = Math.round(newSpeed * 10000.0) / 10000.0;
         if (currentSpeed > newSpeed) {
             currentSpeed = newSpeed;
         }
