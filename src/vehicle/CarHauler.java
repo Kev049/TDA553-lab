@@ -17,8 +17,20 @@ public class CarHauler extends Truck {
         this.loadedCars = new Stack<>();
     }
 
+    public void raisePlatform() {
+        if (this.getCurrentSpeed() == 0){
+            this.platform.raise();
+        }
+    }
+
+    public void lowerPlatform(){
+        if (this.getCurrentSpeed() == 0){
+            this.platform.lower();
+        }
+    }
+    
     public void loadCar(Car car) {
-        if ((this.loadedCars.contains(car) == false) && ) {
+        if ((this.loadedCars.contains(car) == false)) {
             if (isRampDown() && isCarNearTransporter(car) && this.loadedCars.size() < maxNumberOfCars) {
                 this.loadedCars.add(car);
             }
@@ -50,7 +62,7 @@ public class CarHauler extends Truck {
 
     @Override
     public void move() {
-        if (platform.isRampDown()){
+        if (!platform.isRampDown()){
             super.move();
         }
     }
