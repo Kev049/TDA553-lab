@@ -3,7 +3,7 @@ package vehicle;
 import java.awt.*;
 
 
-public class Scania extends Vehicle {
+public class Scania extends Truck {
 
     private final static int numberOfDoors = 2;
     private final static double enginePower = 125.0;
@@ -13,7 +13,6 @@ public class Scania extends Vehicle {
     public Scania(){
         super(numberOfDoors, Color.yellow, enginePower, "Scania");
         this.platform = new ScaniaPlatform();
-        this.platform.getAngle();
     }
 
     public void raiseFlatbed(){
@@ -28,6 +27,10 @@ public class Scania extends Vehicle {
         }
     }
 
+    public int getAngle(){
+        return this.platform.getAngle();
+    }
+
     @Override
     public void move() {
         if (this.platform.getAngle() == 0){
@@ -35,9 +38,6 @@ public class Scania extends Vehicle {
         }
     }
 
-    public double speedFactor(){
-        return 1.0;
-    }
 
 
 }

@@ -2,7 +2,7 @@ package vehicle;
 
 import java.awt.*;
 
-public class Saab95 extends Vehicle {
+public class Saab95 extends Car {
 
     private final static int factorwhenTurboOff = 1;
     private final static double turboFactor = 1.3;
