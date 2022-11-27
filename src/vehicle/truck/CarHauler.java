@@ -1,6 +1,9 @@
-package vehicle;
+package vehicle.truck;
 import java.awt.*;
 import java.util.Stack;
+
+import vehicle.car.Car;
+import vehicle.truck.Platform.CarHaulerRamp;
 
 public class CarHauler extends Truck {
 

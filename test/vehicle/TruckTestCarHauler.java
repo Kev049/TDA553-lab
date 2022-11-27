@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.Test;
 
+import vehicle.truck.CarHauler;
+
 public class TruckTestCarHauler {
 
   CarHauler cHTruck = new CarHauler();

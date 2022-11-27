@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.Test;
 
+import vehicle.car.Saab95;
+
 // import vehicle.Car;
 // import vehicle.Saab95;
 

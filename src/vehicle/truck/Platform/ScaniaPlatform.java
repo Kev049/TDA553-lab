@@ -1,4 +1,4 @@
-package vehicle;
+package vehicle.truck.Platform;
 
 public class ScaniaPlatform implements IPlatform {
 

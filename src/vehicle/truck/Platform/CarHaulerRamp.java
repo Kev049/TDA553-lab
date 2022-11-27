@@ -1,5 +1,4 @@
-package vehicle;
-
+package vehicle.truck.Platform;
 
 public class CarHaulerRamp implements IPlatform {
 
