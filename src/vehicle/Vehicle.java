@@ -143,7 +143,7 @@ public abstract class Vehicle implements Movable {
         return this.modelName;
     }
 
-    public Point2D getPosition() {
+    public Point2D.Double getPosition() {
         return new Point2D.Double(this.position.x, this.position.y);
     }
 
@@ -159,6 +159,10 @@ public abstract class Vehicle implements Movable {
 
     public void setColor(Color clr) {
         this.color = clr;
+    }
+
+    public void setPosition(Point2D.Double pos) {
+        this.position = pos;
     }
 
 }

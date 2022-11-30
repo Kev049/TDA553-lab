@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.Test;
 
 import vehicle.truck.CarHauler;
+import vehicle.car.Volvo240;
+import vehicle.truck.Scania;
 
 public class TruckTestCarHauler {
 
@@ -219,6 +221,43 @@ public class TruckTestCarHauler {
     assertTrue(cHTruck.isRampDown());
   }
   
+  @Test
+  public void CarHaulerCanLoadCar(){
+    Volvo240 carV = new Volvo240();
+    cHTruck.lowerPlatform();
+    cHTruck.loadCar(carV);
+    assertTrue(cHTruck.getLoadedCars().contains(carV));
+  }
 
+  @Test
+  public void CarHaulerCanUnloadCar() {
+    Volvo240 carV = new Volvo240();
+    cHTruck.lowerPlatform();
+    cHTruck.loadCar(carV);
+    cHTruck.unloadCar();
+    assertEquals(0, cHTruck.getLoadedCars().size());
+  }
+
+  @Test
+  public void DoesUnloadedCarGoBehindCarHauler() {
+    Point2D.Double carHaulerPos = cHTruck.getPosition();
+    Point2D.Double expectedPos = new Point2D.Double(carHaulerPos.getX(), carHaulerPos.getY() - 1);
+    
+    Volvo240 carV = new Volvo240();
+    cHTruck.lowerPlatform();
+    cHTruck.loadCar(carV);
+    cHTruck.unloadCar();
+
+    assertEquals(expectedPos, carV.getPosition());
+  }
+
+  @Test
+  public void CannotUnloadCarIfRampDownIsFalse() {
+    Volvo240 carV = new Volvo240();
+    cHTruck.loadCar(carV);
+    assertTrue(cHTruck.getLoadedCars().size() == 0);
+  }
+
+  @Test 
 
 }

@@ -1,9 +1,13 @@
 package vehicle.truck;
 import java.awt.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 import vehicle.car.Car;
 import vehicle.truck.Platform.CarHaulerRamp;
+
+import java.awt.geom.Point2D;
 
 public class CarHauler extends Truck {
 
@@ -12,12 +16,12 @@ public class CarHauler extends Truck {
     private final static int maxNumberOfCars = 5;
 
     private CarHaulerRamp platform;
-    private Stack<Car> loadedCars;
+    private ArrayDeque<Car> loadedCars;
 
     public CarHauler(){
         super(numberOfDoors, Color.red, enginePower, "Car Hauler");
         this.platform = new CarHaulerRamp();
-        this.loadedCars = new Stack<>();
+        this.loadedCars = new ArrayDeque<Car>();
     }
 
     public void raisePlatform() {
@@ -56,10 +60,30 @@ public class CarHauler extends Truck {
         return isCarNearTransporter;
     }
 
-    public void unloadCars() {
+    public void unloadCar() {
         if (isRampDown()) {
             Car unloadedCar = this.loadedCars.pop();
-            // Need to set position of unloadedCar
+            unloadedCar.setPosition(getUnloadedCarPos());
+        }
+    }
+
+    public Deque<Car> getLoadedCars() {
+        //return carHolder.getLoadedCars();
+        return loadedCars;        
+    }
+
+    public Point2D.Double getUnloadedCarPos() {
+        double thisPosX = this.getPosition().getX();
+        double thisPosY = this.getPosition().getY();
+
+        if (this.getDirection() == NORTH) {
+            return new Point2D.Double(thisPosX, thisPosY - 1);
+        } else if (this.getDirection() == SOUTH) {
+            return new Point2D.Double(thisPosX, thisPosY + 1);
+        } else if (this.getDirection() == EAST) {
+            return new Point2D.Double(thisPosX - 1, thisPosY);
+        } else {
+            return new Point2D.Double(thisPosX + 1, thisPosY);
         }
     }
 
