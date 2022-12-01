@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import vehicle.truck.CarHauler;
 import vehicle.car.Volvo240;
-import vehicle.truck.Scania;
 
 public class TruckTestCarHauler {
 
@@ -137,7 +136,6 @@ public class TruckTestCarHauler {
     assertEquals(0.0, cHTruck.getCurrentSpeed(), 0.0001);
   }
 
-  //TODO Change variable name to something more suitable
   @Test
   public void OnePercentBrakeReducesSpeedButCarShouldStillBeMoving() { 
     cHTruck.startEngine();
@@ -234,7 +232,7 @@ public class TruckTestCarHauler {
     Volvo240 carV = new Volvo240();
     cHTruck.lowerPlatform();
     cHTruck.loadCar(carV);
-    cHTruck.unloadCar();
+    cHTruck.unloadCar(carV);
     assertEquals(0, cHTruck.getLoadedCars().size());
   }
 
@@ -246,7 +244,7 @@ public class TruckTestCarHauler {
     Volvo240 carV = new Volvo240();
     cHTruck.lowerPlatform();
     cHTruck.loadCar(carV);
-    cHTruck.unloadCar();
+    cHTruck.unloadCar(carV);
 
     assertEquals(expectedPos, carV.getPosition());
   }
@@ -257,7 +255,5 @@ public class TruckTestCarHauler {
     cHTruck.loadCar(carV);
     assertTrue(cHTruck.getLoadedCars().size() == 0);
   }
-
-  @Test 
 
 }

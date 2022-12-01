@@ -137,7 +137,6 @@ public class TruckTestScania {
     assertEquals(0.0, sTruck.getCurrentSpeed(), 0.0001);
   }
 
-  //TODO Change variable name to something more suitable
   @Test
   public void OnePercentBrakeReducesSpeedButCarShouldStillBeMoving() { 
     sTruck.startEngine();

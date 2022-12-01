@@ -1,16 +1,17 @@
 package vehicle;
 
-import java.util.ArrayDeque;
+import java.util.List;
 
-public class CarHolder {
+import vehicle.car.Car;
+
+public interface CarHolder {
     
-    private ArrayDeque<Car> loadedCars;
+    public void loadCar(Car car);
 
-    
+    public void unloadCar(Car car);
 
+    public List<Car> getLoadedCars();
 
+    public boolean isCarNearby(Car car);
 
-    public Deque<Car> getLoadedCars() {
-        return this.loadedCars;        
-    }
 }
