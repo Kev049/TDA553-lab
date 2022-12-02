@@ -20,6 +20,23 @@ public class CarRepairShop implements CarHolder {
         this.loadedCars = new ArrayList<>();
     }
 
+    public Point2D.Double getPosition() {
+        return new Point2D.Double(this.position.x, this.position.y);
+    }
+
+    public int getMaxAmountOfCars() {
+        return maxAmountOfCars;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    @Override
+    public List<Car> getLoadedCars() {
+        return this.loadedCars;
+    }
+
     @Override
     public void loadCar(Car car) {
         if ((this.loadedCars.isEmpty() || this.loadedCars.size() < maxAmountOfCars) && isCarNearby(car)) {
@@ -49,23 +66,6 @@ public class CarRepairShop implements CarHolder {
         }
 
         return isCarNearby;
-    }
-
-    @Override
-    public List<Car> getLoadedCars() {
-        return this.loadedCars;
-    }
-
-    public Point2D.Double getPosition() {
-        return new Point2D.Double(this.position.x, this.position.y);
-    }
-
-    public int getMaxAmountOfCars() {
-        return maxAmountOfCars;
-    }
-
-    public String getShopName() {
-        return shopName;
     }
 
 }

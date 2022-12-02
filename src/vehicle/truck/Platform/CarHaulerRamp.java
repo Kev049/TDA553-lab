@@ -8,16 +8,19 @@ public class CarHaulerRamp implements IPlatform {
         this.rampDown = false;
     }
 
-    public Boolean isRampDown() {
-        return this.rampDown;
+    @Override
+    public void raise() {
+        this.rampDown = false;
     }
 
+    @Override
     public void lower() {
         this.rampDown = true;
     }
 
-    public void raise() {
-        ;
-        this.rampDown = false;
+    @Override
+    public boolean isRampDown() {
+        return this.rampDown;
     }
+
 }

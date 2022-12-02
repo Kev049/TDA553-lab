@@ -15,7 +15,6 @@ public class CarHauler extends Truck implements CarHolder {
     private final static double enginePower = 125.0;
     private final static int maxNumberOfCars = 5;
 
-    private CarHaulerRamp platform;
     private List<Car> loadedCars;
 
     public CarHauler() {
@@ -24,16 +23,9 @@ public class CarHauler extends Truck implements CarHolder {
         this.loadedCars = new ArrayList<Car>();
     }
 
-    public void raisePlatform() {
-        if (this.getCurrentSpeed() == 0) {
-            this.platform.raise();
-        }
-    }
-
-    public void lowerPlatform() {
-        if (this.getCurrentSpeed() == 0) {
-            this.platform.lower();
-        }
+    @Override
+    public List<Car> getLoadedCars() {
+        return this.loadedCars;
     }
 
     @Override
@@ -44,38 +36,26 @@ public class CarHauler extends Truck implements CarHolder {
             }
         }
     }
-
-    @Override
-    public boolean isCarNearby(Car car) {
-        boolean isCarNearTransporter = false;
-        double transporterPosX = this.getPosition().getX();
-        double transporterPosY = this.getPosition().getY();
-        double carPosX = car.getPosition().getX();
-        double carPosY = car.getPosition().getY();
-
-        if (transporterPosX >= carPosX - 1 && transporterPosX <= carPosX + 1) {
-            if (transporterPosY >= carPosY - 1 && transporterPosY <= carPosY + 1) {
-                isCarNearTransporter = true;
-            }
-        }
-
-        return isCarNearTransporter;
-    }
-
+    
     @Override
     public void unloadCar(Car car) {
         if (isRampDown()) {
             this.loadedCars.remove(car);
-            car.setPosition(getUnloadedCarPos());
+            car.setPosition(calculatePosBehindTruck());
         }
     }
 
     @Override
-    public List<Car> getLoadedCars() {
-        return this.loadedCars;
+    public boolean isCarNearby(Car car) {
+        boolean isCarNearTransporter = false;
+        Point2D.Double expectedPos = calculatePosBehindTruck();
+        if (expectedPos.equals(car.getPosition())) {
+            isCarNearTransporter = true;
+        }
+        return isCarNearTransporter;
     }
 
-    public Point2D.Double getUnloadedCarPos() {
+    public Point2D.Double calculatePosBehindTruck() {
         double thisPosX = this.getPosition().getX();
         double thisPosY = this.getPosition().getY();
 
@@ -95,9 +75,5 @@ public class CarHauler extends Truck implements CarHolder {
         if (!platform.isRampDown()) {
             super.move();
         }
-    }
-
-    public Boolean isRampDown() {
-        return this.platform.isRampDown();
     }
 }

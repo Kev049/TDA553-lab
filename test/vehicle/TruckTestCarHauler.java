@@ -225,6 +225,7 @@ public class TruckTestCarHauler {
   @Test
   public void CarHaulerCanLoadCar() {
     Volvo240 carV = new Volvo240();
+    carV.setPosition(new Point2D.Double(0.0, -1.0));
     cHTruck.lowerPlatform();
     cHTruck.loadCar(carV);
     assertTrue(cHTruck.getLoadedCars().contains(carV));
@@ -233,10 +234,12 @@ public class TruckTestCarHauler {
   @Test
   public void CarHaulerCanUnloadCar() {
     Volvo240 carV = new Volvo240();
+    carV.setPosition(new Point2D.Double(0.0, -1.0));
     cHTruck.lowerPlatform();
     cHTruck.loadCar(carV);
+    assertTrue(cHTruck.getLoadedCars().contains(carV));
     cHTruck.unloadCar(carV);
-    assertEquals(0, cHTruck.getLoadedCars().size());
+    assertFalse(cHTruck.getLoadedCars().contains(carV));
   }
 
   @Test

@@ -13,13 +13,24 @@ public class ScaniaPlatform implements IPlatform {
         return this.currentAngle;
     }
 
+    @Override
+    public void raise() {
+        int flatbedAngle = (int) Math.min(this.currentAngle + elavationSpeed, 70);
+        this.currentAngle = flatbedAngle;
+    }
+
+    @Override
     public void lower() {
         int flatbedAngle = (int) Math.max(this.currentAngle - elavationSpeed, 0);
         this.currentAngle = flatbedAngle;
     }
 
-    public void raise() {
-        int flatbedAngle = (int) Math.min(this.currentAngle + elavationSpeed, 70);
-        this.currentAngle = flatbedAngle;
+    @Override
+    public boolean isRampDown() {
+        if (currentAngle == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

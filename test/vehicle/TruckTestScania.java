@@ -2,6 +2,7 @@ package vehicle;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -184,7 +185,7 @@ public class TruckTestScania {
 
   @Test
   public void scaniaShouldNotMoveIfPlatformIsRaised() {
-    sTruck.raiseFlatbed();
+    sTruck.raisePlatform();
     sTruck.startEngine();
     sTruck.move();
     assertEquals(new Point2D.Double(0.0, 0.0), sTruck.getPosition());
@@ -195,21 +196,21 @@ public class TruckTestScania {
     sTruck.startEngine();
     sTruck.gas(0.25);
     sTruck.move();
-    sTruck.raiseFlatbed();
-    assertEquals(sTruck.getAngle(), 0);
+    sTruck.raisePlatform();
+    assertTrue(sTruck.isRampDown());
   }
 
   @Test
   public void scaniaPlatformShouldNotBeRaisedMoreThan70Degrees() {
     for (int i = 0; i < 20; i++) {
-      sTruck.raiseFlatbed();
+      sTruck.raisePlatform();
     }
     assertEquals(70, sTruck.getAngle());
   }
 
   @Test
   public void platformShouldInitiallyBeDown() {
-    assertEquals(sTruck.getAngle(), 0);
+    assertTrue(sTruck.isRampDown());
   }
 
   @Test
@@ -218,8 +219,8 @@ public class TruckTestScania {
     sTruck.gas(0.25);
     sTruck.move();
     sTruck.stopEngine();
-    sTruck.raiseFlatbed();
-    assertNotEquals(sTruck.getAngle(), 0);
+    sTruck.raisePlatform();
+    assertFalse(sTruck.isRampDown());
   }
 
 }
