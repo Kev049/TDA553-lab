@@ -14,15 +14,15 @@ public class Scania extends Truck {
         this.platform = new ScaniaPlatform();
     }
 
-    public int getAngle() {
-        return ((ScaniaPlatform) this.platform).getAngle();
-    }
-
     @Override
     public void move() {
         if (this.platform.isRampDown()) {
             super.move();
         }
+    }
+
+    public int getAngle() {
+        return ((ScaniaPlatform) this.platform).getAngle();
     }
 
 }

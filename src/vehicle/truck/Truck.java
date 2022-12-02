@@ -13,6 +13,7 @@ public abstract class Truck extends Vehicle {
         super(nrDoors, color, enginePower, modelName);
     }
 
+    @Override
     public double speedFactor() {
         return this.getEnginePower() * this.getSpeedFactorVar();
     }

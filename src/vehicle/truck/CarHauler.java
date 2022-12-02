@@ -36,7 +36,7 @@ public class CarHauler extends Truck implements CarHolder {
             }
         }
     }
-    
+
     @Override
     public void unloadCar(Car car) {
         if (isRampDown()) {
@@ -55,7 +55,7 @@ public class CarHauler extends Truck implements CarHolder {
         return isCarNearTransporter;
     }
 
-    public Point2D.Double calculatePosBehindTruck() {
+    private Point2D.Double calculatePosBehindTruck() {
         double thisPosX = this.getPosition().getX();
         double thisPosY = this.getPosition().getY();
 
@@ -76,4 +76,5 @@ public class CarHauler extends Truck implements CarHolder {
             super.move();
         }
     }
+
 }

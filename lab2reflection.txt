@@ -1,3 +1,0 @@
-del 2 och 3: föreläsning 3-2b (2022 11 22) sida 9-15, utifrån sida 13: Initially, we pondered whether a Scania could be retrofitted with a "car hauler(trailer)". 
-We decided that a Scania dump truck and a car transporter/car hauler are too different and are incredibly unlikely to change type from one to the other.
-Due to our aforementioned decision, we chose not to have them represented through composition(/make use of delegation) from one object Truck. Instead...  
