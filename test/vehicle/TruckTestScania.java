@@ -1,19 +1,13 @@
 package vehicle;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
-
-
+import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import org.junit.Test;
-
 import vehicle.truck.Scania;
-
-// import vehicle.Car;
-// import vehicle.Scania;
+import java.awt.*;
+import java.awt.geom.Point2D;
 
 public class TruckTestScania {
 
@@ -138,7 +132,7 @@ public class TruckTestScania {
   }
 
   @Test
-  public void OnePercentBrakeReducesSpeedButCarShouldStillBeMoving() { 
+  public void OnePercentBrakeReducesSpeedButCarShouldStillBeMoving() {
     sTruck.startEngine();
     assertEquals(0.1, sTruck.getCurrentSpeed(), 0.000001);
     sTruck.brake(0.01);
@@ -189,23 +183,23 @@ public class TruckTestScania {
   }
 
   @Test
-  public void scaniaShouldNotMoveIfPlatformIsRaised(){
+  public void scaniaShouldNotMoveIfPlatformIsRaised() {
     sTruck.raiseFlatbed();
     sTruck.startEngine();
     sTruck.move();
-    assertEquals(new Point2D.Double(0.0,0.0), sTruck.getPosition());
+    assertEquals(new Point2D.Double(0.0, 0.0), sTruck.getPosition());
   }
 
   @Test
-  public void platformShouldNotRiseIfScaniaIsMoving(){
+  public void platformShouldNotRiseIfScaniaIsMoving() {
     sTruck.startEngine();
     sTruck.gas(0.25);
     sTruck.move();
     sTruck.raiseFlatbed();
     assertEquals(sTruck.getAngle(), 0);
   }
-  
-  @Test 
+
+  @Test
   public void scaniaPlatformShouldNotBeRaisedMoreThan70Degrees() {
     for (int i = 0; i < 20; i++) {
       sTruck.raiseFlatbed();
@@ -217,7 +211,7 @@ public class TruckTestScania {
   public void platformShouldInitiallyBeDown() {
     assertEquals(sTruck.getAngle(), 0);
   }
-  
+
   @Test
   public void platformShouldBeOperableAfterScaniaHasBecomeStationary() {
     sTruck.startEngine();
@@ -227,5 +221,5 @@ public class TruckTestScania {
     sTruck.raiseFlatbed();
     assertNotEquals(sTruck.getAngle(), 0);
   }
-  
+
 }

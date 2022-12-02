@@ -1,19 +1,14 @@
 package vehicle;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
-
+import org.junit.After;
+import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import org.junit.After;
-import org.junit.Test;
-
 import vehicle.car.Volvo240;
-
-// import vehicle.Car;
-// import vehicle.Volvo240;
+import java.awt.*;
+import java.awt.geom.Point2D;
 
 public class CarTestVolvo {
 

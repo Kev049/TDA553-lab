@@ -1,18 +1,15 @@
 package vehicle;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
-
-
+import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import org.junit.Test;
-
 import vehicle.truck.CarHauler;
 import vehicle.car.Volvo240;
+import java.awt.*;
+import java.awt.geom.Point2D;
 
 public class TruckTestCarHauler {
 
@@ -137,7 +134,7 @@ public class TruckTestCarHauler {
   }
 
   @Test
-  public void OnePercentBrakeReducesSpeedButCarShouldStillBeMoving() { 
+  public void OnePercentBrakeReducesSpeedButCarShouldStillBeMoving() {
     cHTruck.startEngine();
     assertEquals(0.1, cHTruck.getCurrentSpeed(), 0.000001);
     cHTruck.brake(0.01);
@@ -188,15 +185,26 @@ public class TruckTestCarHauler {
   }
 
   @Test
-  public void CarHaulerShouldNotMoveIfPlatformIsLowered(){
-    cHTruck.lowerPlatform();
-    cHTruck.startEngine();
-    cHTruck.move();
-    assertEquals(new Point2D.Double(0.0,0.0), cHTruck.getPosition());
+  public void platformShouldInitiallyBeUp() {
+    assertFalse(cHTruck.isRampDown());
   }
 
   @Test
-  public void platformShouldNotRiseIfCarHaulerIsMoving(){
+  public void carHaulerCanRaisePlatform() {
+    cHTruck.raisePlatform();
+    assertFalse(cHTruck.isRampDown());
+  }
+
+  @Test
+  public void CarHaulerShouldNotMoveIfPlatformIsLowered() {
+    cHTruck.lowerPlatform();
+    cHTruck.startEngine();
+    cHTruck.move();
+    assertEquals(new Point2D.Double(0.0, 0.0), cHTruck.getPosition());
+  }
+
+  @Test
+  public void platformShouldNotRiseIfCarHaulerIsMoving() {
     cHTruck.startEngine();
     cHTruck.gas(0.25);
     cHTruck.move();
@@ -204,11 +212,6 @@ public class TruckTestCarHauler {
     assertFalse(cHTruck.isRampDown());
   }
 
-  @Test
-  public void platformShouldInitiallyBeDown() {
-    assertFalse(cHTruck.isRampDown());
-  }
-  
   @Test
   public void platformShouldBeOperableAfterCarHaulerHasBecomeStationary() {
     cHTruck.startEngine();
@@ -218,9 +221,9 @@ public class TruckTestCarHauler {
     cHTruck.lowerPlatform();
     assertTrue(cHTruck.isRampDown());
   }
-  
+
   @Test
-  public void CarHaulerCanLoadCar(){
+  public void CarHaulerCanLoadCar() {
     Volvo240 carV = new Volvo240();
     cHTruck.lowerPlatform();
     cHTruck.loadCar(carV);
@@ -240,7 +243,7 @@ public class TruckTestCarHauler {
   public void DoesUnloadedCarGoBehindCarHauler() {
     Point2D.Double carHaulerPos = cHTruck.getPosition();
     Point2D.Double expectedPos = new Point2D.Double(carHaulerPos.getX(), carHaulerPos.getY() - 1);
-    
+
     Volvo240 carV = new Volvo240();
     cHTruck.lowerPlatform();
     cHTruck.loadCar(carV);

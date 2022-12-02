@@ -4,7 +4,6 @@ import java.awt.*;
 
 import vehicle.truck.Platform.ScaniaPlatform;
 
-
 public class Scania extends Truck {
 
     private final static int numberOfDoors = 2;
@@ -12,34 +11,32 @@ public class Scania extends Truck {
 
     private ScaniaPlatform platform;
 
-    public Scania(){
+    public Scania() {
         super(numberOfDoors, Color.yellow, enginePower, "Scania");
         this.platform = new ScaniaPlatform();
     }
 
-    public void raiseFlatbed(){
-        if (this.getCurrentSpeed() == 0){
+    public void raiseFlatbed() {
+        if (this.getCurrentSpeed() == 0) {
             this.platform.raise();
         }
     }
 
-    public void lowerFlatbed(){
-        if (this.getCurrentSpeed() == 0){
+    public void lowerFlatbed() {
+        if (this.getCurrentSpeed() == 0) {
             this.platform.lower();
         }
     }
 
-    public int getAngle(){
+    public int getAngle() {
         return this.platform.getAngle();
     }
 
     @Override
     public void move() {
-        if (this.platform.getAngle() == 0){
+        if (this.platform.getAngle() == 0) {
             super.move();
         }
     }
-
-
 
 }

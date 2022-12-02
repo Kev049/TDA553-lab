@@ -16,7 +16,8 @@ public class CarHaulerRamp implements IPlatform {
         this.rampDown = true;
     }
 
-    public void raise() {;
+    public void raise() {
+        ;
         this.rampDown = false;
     }
 }

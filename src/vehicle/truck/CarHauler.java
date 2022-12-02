@@ -1,13 +1,13 @@
 package vehicle.truck;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.geom.Point2D;
 
 import vehicle.CarHolder;
 import vehicle.car.Car;
 import vehicle.truck.Platform.CarHaulerRamp;
-
-import java.awt.geom.Point2D;
 
 public class CarHauler extends Truck implements CarHolder {
 
@@ -18,24 +18,24 @@ public class CarHauler extends Truck implements CarHolder {
     private CarHaulerRamp platform;
     private List<Car> loadedCars;
 
-    public CarHauler(){
+    public CarHauler() {
         super(numberOfDoors, Color.red, enginePower, "Car Hauler");
         this.platform = new CarHaulerRamp();
         this.loadedCars = new ArrayList<Car>();
     }
 
     public void raisePlatform() {
-        if (this.getCurrentSpeed() == 0){
+        if (this.getCurrentSpeed() == 0) {
             this.platform.raise();
         }
     }
 
-    public void lowerPlatform(){
-        if (this.getCurrentSpeed() == 0){
+    public void lowerPlatform() {
+        if (this.getCurrentSpeed() == 0) {
             this.platform.lower();
         }
     }
-    
+
     @Override
     public void loadCar(Car car) {
         if ((this.loadedCars.contains(car) == false)) {
@@ -72,7 +72,7 @@ public class CarHauler extends Truck implements CarHolder {
 
     @Override
     public List<Car> getLoadedCars() {
-        return this.loadedCars;        
+        return this.loadedCars;
     }
 
     public Point2D.Double getUnloadedCarPos() {
@@ -92,12 +92,12 @@ public class CarHauler extends Truck implements CarHolder {
 
     @Override
     public void move() {
-        if (!platform.isRampDown()){
+        if (!platform.isRampDown()) {
             super.move();
         }
     }
 
-    public Boolean isRampDown(){
+    public Boolean isRampDown() {
         return this.platform.isRampDown();
     }
 }

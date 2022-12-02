@@ -8,7 +8,7 @@ public class Saab95 extends Car {
     private final static double turboFactor = 1.3;
     private final static int numberOfDoors = 2;
     private final static double enginePower = 125.0;
-    
+
     private boolean turboOn;
 
     public Saab95() {

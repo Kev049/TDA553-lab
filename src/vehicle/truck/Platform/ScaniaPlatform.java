@@ -12,15 +12,14 @@ public class ScaniaPlatform implements IPlatform {
     public int getAngle() {
         return this.currentAngle;
     }
-    
-    
+
     public void lower() {
-        int flatbedAngle = (int)Math.max(this.currentAngle - elavationSpeed,0);
+        int flatbedAngle = (int) Math.max(this.currentAngle - elavationSpeed, 0);
         this.currentAngle = flatbedAngle;
     }
 
     public void raise() {
-        int flatbedAngle = (int)Math.min(this.currentAngle + elavationSpeed, 70);
+        int flatbedAngle = (int) Math.min(this.currentAngle + elavationSpeed, 70);
         this.currentAngle = flatbedAngle;
     }
 }

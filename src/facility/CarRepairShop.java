@@ -13,19 +13,19 @@ public class CarRepairShop implements CarHolder {
     private Point2D.Double position;
     private String shopName;
 
-    public CarRepairShop(int max, Point2D.Double position, String shopName){
+    public CarRepairShop(int max, Point2D.Double position, String shopName) {
         this.maxAmountOfCars = max;
-        this.position = position; 
+        this.position = position;
         this.shopName = shopName;
         this.loadedCars = new ArrayList<>();
     }
 
-	@Override
-	public void loadCar(Car car) {
+    @Override
+    public void loadCar(Car car) {
         if ((this.loadedCars.isEmpty() || this.loadedCars.size() < maxAmountOfCars) && isCarNearby(car)) {
             this.loadedCars.add(car);
         }
-	}
+    }
 
     @Override
     public void unloadCar(Car car) {
@@ -33,11 +33,6 @@ public class CarRepairShop implements CarHolder {
         Point2D.Double newCarPos = new Point2D.Double(this.getPosition().getX() + 2, this.getPosition().getY());
         car.setPosition(newCarPos);
     }
-
-	@Override
-	public List<Car> getLoadedCars() {
-		return this.loadedCars;
-	}
 
     @Override
     public boolean isCarNearby(Car car) {
@@ -56,11 +51,15 @@ public class CarRepairShop implements CarHolder {
         return isCarNearby;
     }
 
+    @Override
+    public List<Car> getLoadedCars() {
+        return this.loadedCars;
+    }
+
     public Point2D.Double getPosition() {
         return new Point2D.Double(this.position.x, this.position.y);
     }
 
-    
     public int getMaxAmountOfCars() {
         return maxAmountOfCars;
     }
