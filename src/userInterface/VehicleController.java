@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import java.awt.geom.Point2D;
+
 /*
 * This class represents the Controller part in the MVC pattern.
 * It's responsibilities is to listen to the View and responds in a appropriate manner by
@@ -35,13 +37,16 @@ public class VehicleController {
     //methods:
 
     public VehicleController(ArrayList<String> vehicleModelNames) {
+        int i = 1;
         for (String modelName : vehicleModelNames) {
             Vehicle v = VehicleFactory.createVehicle(modelName);
             this.vehicles.add(v);
+            v.setPosition(new Point2D.Double(0, 100.0*i));
+            i++;
         }
+        this.vehicleModelNames = vehicleModelNames;
         this.frame = new VehicleView("CarSim 1.0", this);
         this.timer.start();
-        this.vehicleModelNames = vehicleModelNames;
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -50,11 +55,12 @@ public class VehicleController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle vehicle : vehicles) {
+                //vehicle.setPosition(new Point2D.Double(0, 100.0*i));
                 vehicle.move();
                 int x = (int) Math.round(vehicle.getPosition().getX());
                 int y = (int) Math.round(vehicle.getPosition().getY());
-                System.out.println(y);
-                //System.out.println(frame);
+                //System.out.println(y);
+                //TODO change frame.drawPanel.moveit to frame.move()
                 frame.drawPanel.moveit(x, y, vehicle.getModelName());
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();

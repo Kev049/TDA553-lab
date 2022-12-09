@@ -22,7 +22,8 @@ public class VehicleView extends JFrame{
     // The controller member
     VehicleController vehicleC;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    DrawPanel drawPanel;
+    // DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel controlPanel = new JPanel();
 
@@ -44,6 +45,7 @@ public class VehicleView extends JFrame{
     // Constructor
     public VehicleView(String framename, VehicleController vc){
         this.vehicleC = vc;
+        drawPanel = new DrawPanel(X, Y-240, vc.vehicleModelNames);
         initComponents(framename);
     }
 
