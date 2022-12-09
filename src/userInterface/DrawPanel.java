@@ -15,10 +15,10 @@ public class DrawPanel extends JPanel{
 
     ArrayList<String> vehicleModelNames;
     HashMap <String, Point> positionMap;
-    HashMap <String, BufferedImage> imageMap;
+    HashMap <String, BufferedImage> vehicleImageMap;
     
     // TODO: Make this general for all cars
-    void moveit(int x, int y, String modelName){
+    void moveVehicle(int x, int y, String modelName){
         if (positionMap.containsKey(modelName)) {
             positionMap.put(modelName, new Point(x, y));
         }
@@ -32,7 +32,7 @@ public class DrawPanel extends JPanel{
         
         this.vehicleModelNames = vehicleModelNames;
         this.positionMap = new HashMap<>();
-        this.imageMap = new HashMap<>();
+        this.vehicleImageMap = new HashMap<>();
 
         System.out.println(vehicleModelNames);
 
@@ -41,7 +41,7 @@ public class DrawPanel extends JPanel{
             try {
                 String path = "pics/" + modelName + ".jpg";
                 BufferedImage image = ImageIO.read(DrawPanel.class.getResourceAsStream(path));
-                imageMap.put(modelName, image);
+                vehicleImageMap.put(modelName, image);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -54,7 +54,7 @@ public class DrawPanel extends JPanel{
         super.paintComponent(g);
         for (String modelName : vehicleModelNames){
             Point pos = positionMap.get(modelName);
-            g.drawImage(imageMap.get(modelName), pos.x, pos.y, null);
+            g.drawImage(vehicleImageMap.get(modelName), pos.x, pos.y, null);
         }
     }
 

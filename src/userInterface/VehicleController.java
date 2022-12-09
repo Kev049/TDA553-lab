@@ -61,7 +61,7 @@ public class VehicleController {
                 int y = (int) Math.round(vehicle.getPosition().getY());
                 //System.out.println(y);
                 //TODO change frame.drawPanel.moveit to frame.move()
-                frame.drawPanel.moveit(x, y, vehicle.getModelName());
+                frame.drawPanel.moveVehicle(x, y, vehicle.getModelName());
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
