@@ -1,11 +1,11 @@
-package facility;
+package model.facility;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import vehicle.CarHolder;
-import vehicle.car.Car;
+import model.vehicle.CarHolder;
+import model.vehicle.car.Car;
 
 public class CarRepairShop implements CarHolder {
     private List<Car> loadedCars;

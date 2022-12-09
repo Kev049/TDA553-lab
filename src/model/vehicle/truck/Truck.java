@@ -1,9 +1,9 @@
-package vehicle.truck;
+package model.vehicle.truck;
 
 import java.awt.*;
 
-import vehicle.Vehicle;
-import vehicle.truck.Platform.IPlatform;
+import model.vehicle.Vehicle;
+import model.vehicle.truck.Platform.IPlatform;
 
 public abstract class Truck extends Vehicle {
 

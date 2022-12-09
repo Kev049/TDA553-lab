@@ -1,8 +1,8 @@
-package vehicle.truck;
+package model.vehicle.truck;
 
 import java.awt.*;
 
-import vehicle.truck.Platform.ScaniaPlatform;
+import model.vehicle.truck.Platform.ScaniaPlatform;
 
 public class Scania extends Truck {
 

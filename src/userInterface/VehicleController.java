@@ -1,4 +1,10 @@
+package userInterface;
+
 import javax.swing.*;
+
+import model.vehicle.Vehicle;
+import model.vehicle.VehicleFactory;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -9,7 +15,7 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
 
-public class CarController {
+public class VehicleController {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -19,23 +25,23 @@ public class CarController {
     private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    VehicleView frame;
+    
     // A list of cars, modify if needed
-    ArrayList<ACar> cars = new ArrayList<>();
+    ArrayList<Vehicle> vehicles = new ArrayList<>();
+
+    ArrayList<String> vehicleModelNames = new ArrayList<>();
 
     //methods:
 
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        cc.cars.add(new Volvo240());
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
-        cc.timer.start();
+    public VehicleController(ArrayList<String> vehicleModelNames) {
+        for (String modelName : vehicleModelNames) {
+            Vehicle v = VehicleFactory.createVehicle(modelName);
+            this.vehicles.add(v);
+        }
+        this.frame = new VehicleView("CarSim 1.0", this);
+        this.timer.start();
+        this.vehicleModelNames = vehicleModelNames;
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -43,11 +49,13 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (ACar car : cars) {
-                car.move();
-                int x = (int) Math.round(car.getPosition().getX());
-                int y = (int) Math.round(car.getPosition().getY());
-                frame.drawPanel.moveit(x, y);
+            for (Vehicle vehicle : vehicles) {
+                vehicle.move();
+                int x = (int) Math.round(vehicle.getPosition().getX());
+                int y = (int) Math.round(vehicle.getPosition().getY());
+                System.out.println(y);
+                //System.out.println(frame);
+                frame.drawPanel.moveit(x, y, vehicle.getModelName());
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -57,9 +65,8 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (ACar car : cars
-                ) {
-            car.gas(gas);
+        for (Vehicle vehicle : vehicles) {
+            vehicle.gas(gas);
         }
     }
 }

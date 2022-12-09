@@ -1,4 +1,4 @@
-package vehicle.truck.Platform;
+package model.vehicle.truck.Platform;
 
 public interface IPlatform {
     public void raise();

@@ -1,13 +1,16 @@
 package vehicle;
 
 import org.junit.Test;
+
+import model.vehicle.Vehicle;
+import model.vehicle.car.Volvo240;
+import model.vehicle.truck.CarHauler;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import vehicle.truck.CarHauler;
-import vehicle.car.Volvo240;
 import java.awt.*;
 import java.awt.geom.Point2D;
 

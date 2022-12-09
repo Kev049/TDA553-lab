@@ -1,12 +1,15 @@
 package facility;
 
 import org.junit.Test;
+
+import model.facility.CarRepairShop;
+import model.vehicle.car.Volvo240;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import vehicle.car.Volvo240;
 import java.awt.geom.Point2D;
 
 public class FacilityTestCarRepairShop {

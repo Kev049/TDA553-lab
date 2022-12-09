@@ -1,8 +1,8 @@
-package vehicle.car;
+package model.vehicle.car;
 
 import java.awt.*;
 
-import vehicle.Vehicle;
+import model.vehicle.Vehicle;
 
 public abstract class Car extends Vehicle {
 

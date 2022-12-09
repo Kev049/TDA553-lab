@@ -1,13 +1,14 @@
-package vehicle.truck;
+package model.vehicle.truck;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.geom.Point2D;
 
-import vehicle.CarHolder;
-import vehicle.car.Car;
-import vehicle.truck.Platform.CarHaulerRamp;
+import model.vehicle.CarHolder;
+import model.vehicle.car.Car;
+import model.vehicle.truck.Platform.CarHaulerRamp;
+
+import java.awt.geom.Point2D;
 
 public class CarHauler extends Truck implements CarHolder {
 

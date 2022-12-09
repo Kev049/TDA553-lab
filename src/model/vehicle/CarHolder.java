@@ -1,8 +1,8 @@
-package vehicle;
+package model.vehicle;
 
 import java.util.List;
 
-import vehicle.car.Car;
+import model.vehicle.car.Car;
 
 public interface CarHolder {
 

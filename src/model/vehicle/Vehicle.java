@@ -1,4 +1,4 @@
-package vehicle;
+package model.vehicle;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -104,7 +104,9 @@ public abstract class Vehicle implements Movable {
     }
 
     private void incrementSpeed(double amount) {
-        double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        // TODO Change back
+        double newSpeed = speedFactor();
+        // double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
         newSpeed = roundSpeed(newSpeed);
         if (currentSpeed < newSpeed) {
             currentSpeed = newSpeed;
@@ -167,5 +169,6 @@ public abstract class Vehicle implements Movable {
     public void setPosition(Point2D.Double pos) {
         this.position = pos;
     }
+
 
 }
