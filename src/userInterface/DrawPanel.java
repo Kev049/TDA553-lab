@@ -11,14 +11,13 @@ import javax.swing.*;
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+public class DrawPanel extends JPanel {
 
     ArrayList<String> vehicleModelNames;
-    HashMap <String, Point> positionMap;
-    HashMap <String, BufferedImage> vehicleImageMap;
-    
-    // TODO: Make this general for all cars
-    void moveVehicle(int x, int y, String modelName){
+    HashMap<String, Point> positionMap;
+    HashMap<String, BufferedImage> vehicleImageMap;
+
+    void moveVehicle(int x, int y, String modelName) {
         if (positionMap.containsKey(modelName)) {
             positionMap.put(modelName, new Point(x, y));
         }
@@ -29,12 +28,10 @@ public class DrawPanel extends JPanel{
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
-        
+
         this.vehicleModelNames = vehicleModelNames;
         this.positionMap = new HashMap<>();
         this.vehicleImageMap = new HashMap<>();
-
-        System.out.println(vehicleModelNames);
 
         for (String modelName : vehicleModelNames) {
             positionMap.put(modelName, new Point());
@@ -52,7 +49,7 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (String modelName : vehicleModelNames){
+        for (String modelName : vehicleModelNames) {
             Point pos = positionMap.get(modelName);
             g.drawImage(vehicleImageMap.get(modelName), pos.x, pos.y, null);
         }

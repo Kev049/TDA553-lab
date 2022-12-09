@@ -10,8 +10,6 @@ public class CarSimulatorApp {
         vehicleModelNames.add("Saab95");
         vehicleModelNames.add("Scania");
 
-        // Instance of this class
-        VehicleController vc = new VehicleController(vehicleModelNames);
-        //vc.frame = new VehicleView("CarSim 1.0", vc);
+        new VehicleController(vehicleModelNames);
     }
 }
